@@ -12,15 +12,56 @@ namespace Gama_SistemaFinanceiro
     {
         private static SQLiteConnection connection;
 
-        private static SQLiteConnection ConnectionDataBase()
+        private static SQLiteConnection ConnectionDataBase() //metodo de criar conexão//
         {
-            connection = new SQLiteConnection("Data Source = C: \\Users\\joaog\\Documents\\Projeto carlos financeiro\\Gama_SistemaFinanceiro\\data_base\\bd_financeiro.db");
+            connection = new SQLiteConnection("Data Source=C:\\Users\\joaog\\Documents\\Projeto carlos financeiro\\Gama_SistemaFinanceiro\\data_base\\bd_financeiro.db");
             connection.Open();
             return connection;
-
-
         }
 
+        public static DataTable GetAllUsers() //metodo//
+        {
 
+            SQLiteDataAdapter da = null; //data adapter 
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = ConnectionDataBase().CreateCommand()) // criando um container da conexao com o banco//
+                {
+                    cmd.CommandText = "SELECT * FROM tb_usuarios";
+                    da = new SQLiteDataAdapter(cmd.CommandText, ConnectionDataBase());
+                    da.Fill(dt); //preenchido com conteudo da consulta//
+                    ConnectionDataBase().Close();
+                    return dt;
+                }
+            }catch(Exception ex)
+            {
+                ConnectionDataBase().Close();
+                throw ex;
+            }
+        }
+
+        public static DataTable consult(string sql) // metodo parametro
+        {
+            SQLiteDataAdapter da = null; //data adapter 
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = ConnectionDataBase().CreateCommand()) // criando um container da conexao com o banco//
+                {
+                    cmd.CommandText = sql;
+                    da = new SQLiteDataAdapter(cmd.CommandText, ConnectionDataBase());
+                    da.Fill(dt);
+                    ConnectionDataBase().Close();
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                ConnectionDataBase().Close();
+                throw ex;
+            }
+
+        }
     }
 }
