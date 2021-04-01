@@ -14,6 +14,7 @@ namespace Gama_SistemaFinanceiro
 
         private static SQLiteConnection ConnectionDataBase() //metodo de criar conexão//
         {
+            // Essa conexão pode ser feita de outra maneira se estivesse sob a estrutura de uma API
             connection = new SQLiteConnection("Data Source=C:\\Users\\joaog\\Documents\\Projeto carlos financeiro\\Gama_SistemaFinanceiro\\data_base\\bd_financeiro.db");
             connection.Open();
             return connection;
