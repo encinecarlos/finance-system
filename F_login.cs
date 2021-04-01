@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// a API ta aonde nessa história toda?
 namespace Gama_SistemaFinanceiro
 {
     public partial class F_login : Form
